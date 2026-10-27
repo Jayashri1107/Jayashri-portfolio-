@@ -1,4 +1,5 @@
 import ProjectPreview from './ProjectPreview.jsx';
+import { asset } from '../asset.js';
 
 function BrowserFrame({ url, children }) {
   return (
@@ -59,7 +60,7 @@ export default function ProjectMedia({ project }) {
   if (project.media === 'image')
     return (
       <BrowserFrame url={project.links[0].href.replace('https://', '')}>
-        <img className="preview__img" src={project.image} alt={`${project.title} screenshot`} loading="lazy" />
+        <img className="preview__img" src={asset(project.image)} alt={`${project.title} screenshot`} loading="lazy" />
       </BrowserFrame>
     );
   if (project.media === 'shop') return <ShopMock />;

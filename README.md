@@ -24,32 +24,34 @@ Your resume is `public/Jayashri_Sable_Resume.pdf` – replace the file to update
   and every message after that arrives in your inbox. Send yourself a test message right after deploying.
 - **Send on WhatsApp instead** opens WhatsApp with the visitor's message already typed to your number.
 
-## Deploy for free (one-time setup)
+## Deploy for free on GitHub Pages (one-time setup)
 
-1. **GitHub account** – sign up at https://github.com/signup (free).
-2. **Create an empty repository** on GitHub called `portfolio` (Public, no README).
-3. **Push this code** (run in this folder, replace `YOUR-USERNAME`):
+1. On GitHub (signed in as **Jayashri1107**) click **New repository**.
+   Name it exactly **`Jayashri1107.github.io`**, choose **Public**, do not add a README, click **Create repository**.
+2. Push the code from this folder (sign in to GitHub when asked):
    ```bash
-   git remote add origin https://github.com/YOUR-USERNAME/portfolio.git
-   git branch -M main
    git push -u origin main
    ```
-4. **Vercel account** – go to https://vercel.com/signup and choose **Continue with GitHub** (Hobby plan is free).
-5. In Vercel click **Add New → Project**, pick the `portfolio` repository, keep the defaults
-   (Framework: Vite, Build: `npm run build`, Output: `dist`) and click **Deploy**.
-6. After ~1 minute you get a free link like `https://portfolio-yourname.vercel.app`.
-   You can rename it in Vercel → Project → Settings → Domains.
+3. In the repository go to **Settings → Pages** and under **Build and deployment → Source** choose **GitHub Actions**.
+4. Open the **Actions** tab – the "Deploy to GitHub Pages" job runs automatically (about 1 minute).
+5. Your site is live at **https://jayashri1107.github.io/**
 
-Every time you `git push`, Vercel updates the live site automatically.
+Every `git push` to `main` rebuilds and republishes the site automatically (see `.github/workflows/deploy.yml`).
+If you use another repository name (for example `portfolio`), the site works too, at
+`https://jayashri1107.github.io/portfolio/` – the workflow sets the right path by itself.
+
+The site also still works on Vercel (`vercel.json` is included) if you ever want to switch.
 
 ## Project structure
 
 ```
 src/
-  data/profile.js        all text and links
+  data/profile.js        all text and links (including each project's page content)
   Portfolio.jsx          home page sections
+  ProjectPage.jsx        separate page for each project (/projects/<name>)
   components/            navbar, icons, live project preview
   demos/                 clinic, inventory and business demos
 public/                  resume PDF, favicon
-vercel.json              makes /demos/... links work on Vercel
+vercel.json              makes page links work on Vercel
+.github/workflows/       automatic GitHub Pages deployment
 ```

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Navbar from './components/Navbar.jsx';
 import Icon from './components/Icon.jsx';
 import ProjectMedia from './components/ProjectMedia.jsx';
+import { asset } from './asset.js';
 import { profile, stats, experience, education, services, projects, skills, tools, process } from './data/profile.js';
 
 function SectionHead({ eyebrow, title, text }) {
@@ -37,7 +38,7 @@ function Hero() {
           </div>
           <div className="hero__meta">
             <span><Icon name="pin" size={16} /> {profile.location}</span>
-            <a href={profile.resume} download="Jayashri_Sable_Resume.pdf"><Icon name="download" size={16} /> Download resume</a>
+            <a href={asset(profile.resume)} download="Jayashri_Sable_Resume.pdf"><Icon name="download" size={16} /> Download resume</a>
           </div>
         </div>
         <div className="hero__card">
@@ -155,41 +156,28 @@ function Projects() {
         <SectionHead
           eyebrow="Projects"
           title="Selected work"
-          text="Real products I have worked on as part of development teams, plus a demo website you can try. Demo projects use sample data only and are not client work."
+          text="Real products I have worked on as part of development teams, plus a demo website you can try (sample content, not client work). Open any project to see the full details."
         />
-        <div className="projects">
+        <div className="pcards">
           {projects.map((p, i) => (
-            <article key={p.slug} className={`project ${i % 2 ? 'project--flip' : ''}`}>
-              <div className="project__media">
+            <Link key={p.slug} to={`/projects/${p.slug}`} className="pcard">
+              <div className="pcard__media">
                 <ProjectMedia project={p} />
               </div>
-              <div className="project__body">
+              <div className="pcard__body">
                 <div className="project__top">
                   <span className="project__num">{String(i + 1).padStart(2, '0')}</span>
                   <span className={`tag tag--${p.kind}`}>{p.kind === 'work' ? 'Professional work' : 'Demo project'}</span>
                 </div>
                 <h3>{p.title}</h3>
-                <span className="project__role">{p.role}</span>
-                <p>{p.summary}</p>
-                <ul className="checks">
-                  {p.features.map((f) => (
-                    <li key={f}><Icon name="check" size={16} /> {f}</li>
-                  ))}
-                </ul>
+                <span className="pcard__sub">{p.subtitle}</span>
+                <p>{p.short}</p>
                 <div className="chips">
-                  {p.stack.map((t) => <span key={t} className="chip">{t}</span>)}
+                  {p.stack.slice(0, 4).map((t) => <span key={t} className="chip">{t}</span>)}
                 </div>
-                <div className="project__links">
-                  {p.links.map((l, j) => {
-                    const cls = `btn ${j === 0 ? 'btn--primary' : 'btn--ghost'}`;
-                    const inner = <>{l.label} <Icon name="external" size={16} /></>;
-                    return l.to
-                      ? <Link key={l.label} to={l.to} className={cls}>{inner}</Link>
-                      : <a key={l.label} href={l.href} target="_blank" rel="noreferrer" className={cls}>{inner}</a>;
-                  })}
-                </div>
+                <span className="pcard__more">View project <Icon name="arrow" size={16} /></span>
               </div>
-            </article>
+            </Link>
           ))}
         </div>
       </div>
@@ -316,7 +304,7 @@ function Contact() {
               </a>
             ))}
           </div>
-          <a href={profile.resume} download="Jayashri_Sable_Resume.pdf" className="btn btn--light">
+          <a href={asset(profile.resume)} download="Jayashri_Sable_Resume.pdf" className="btn btn--light">
             <Icon name="download" size={18} /> Download my resume
           </a>
         </div>

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { asset } from '../asset.js';
 
 // A live, scaled-down view of a demo page – a real "screenshot" that is always up to date.
 const FRAME_W = 1280;
@@ -24,7 +25,7 @@ export default function ProjectPreview({ path, title }) {
       </div>
       <div className="preview__screen" style={{ height: FRAME_H * scale }}>
         <iframe
-          src={`${path}?preview=1`}
+          src={`${asset(path)}?preview=1`}
           title={`${title} preview`}
           loading="lazy"
           tabIndex={-1}
