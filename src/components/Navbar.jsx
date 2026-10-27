@@ -35,7 +35,7 @@ export default function Navbar() {
               {label}
             </a>
           ))}
-          <a href={profile.resume} download className="btn btn--ghost btn--sm nav__resume">
+          <a href={profile.resume} download="Jayashri_Sable_Resume.pdf" className="btn btn--ghost btn--sm nav__resume">
             <Icon name="download" size={16} /> Resume
           </a>
           <a href="#contact" className="btn btn--primary btn--sm" onClick={() => setOpen(false)}>

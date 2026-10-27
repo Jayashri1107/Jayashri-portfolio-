@@ -1,5 +1,4 @@
 // All personal details and links live here. Edit this file to update the site.
-// TODO: replace the LinkedIn and GitHub links with your own profile URLs.
 
 export const profile = {
   name: 'Jayashri Sable',
@@ -9,8 +8,8 @@ export const profile = {
   email: 'jsable554@gmail.com',
   phoneDisplay: '+91 90229 37420',
   whatsapp: '919022937420',
-  linkedin: 'https://www.linkedin.com/in/your-linkedin-id',
-  github: 'https://github.com/your-github-username',
+  linkedin: 'https://www.linkedin.com/in/jayashri-sable-981b27272',
+  github: 'https://github.com/Jayashri1107',
   resume: '/Jayashri_Sable_Resume.pdf',
   intro:
     'I build fast, secure and easy-to-use websites and custom software for growing businesses – from a clean business website to a complete admin dashboard, CRM or management system.',
@@ -127,8 +126,13 @@ export const projects = [
     title: 'Business Website – Interior Studio',
     role: 'Demo project · built to show what I can make for your business',
     summary:
-      'A complete website for a fictional interior design studio, with services and prices, a work gallery, reviews, an enquiry form and a WhatsApp button.',
-    features: ['Mobile-friendly design', 'Services & pricing sections', 'Enquiry form with validation', 'WhatsApp call-to-action'],
+      'A complete, conversion-focused website for a fictional interior design studio – the kind of site that turns visitors into phone calls and enquiries.',
+    features: [
+      'Custom illustrations and smooth scroll animations',
+      'Filterable design gallery and pricing packages',
+      'Enquiry form with validation and WhatsApp button',
+      'Reviews, FAQ and fully mobile-friendly layout',
+    ],
     stack: ['React.js', 'CSS'],
     media: 'live',
     path: '/demos/business',

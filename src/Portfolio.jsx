@@ -37,7 +37,7 @@ function Hero() {
           </div>
           <div className="hero__meta">
             <span><Icon name="pin" size={16} /> {profile.location}</span>
-            <a href={profile.resume} download><Icon name="download" size={16} /> Download resume</a>
+            <a href={profile.resume} download="Jayashri_Sable_Resume.pdf"><Icon name="download" size={16} /> Download resume</a>
           </div>
         </div>
         <div className="hero__card">
@@ -243,18 +243,54 @@ function Process() {
   );
 }
 
-function Contact() {
-  const [form, setForm] = useState({ name: '', service: services[0].title, message: '' });
-  const set = (k) => (e) => setForm({ ...form, [k]: e.target.value });
-  const text = `Hello Jayashri, I'm ${form.name || '(your name)'}.\nI'm interested in: ${form.service}.\n\n${form.message}`;
-  const ready = form.name.trim() && form.message.trim();
+const emptyForm = { name: '', contact: '', service: services[0].title, message: '', _honey: '' };
 
-  const sendWhatsApp = (e) => {
+function Contact() {
+  const [form, setForm] = useState(emptyForm);
+  const [status, setStatus] = useState('idle'); // idle | sending | sent | error
+  const [note, setNote] = useState('');
+  const set = (k) => (e) => setForm({ ...form, [k]: e.target.value });
+  const ready = form.name.trim() && form.contact.trim() && form.message.trim();
+  const text = `Hello Jayashri, I'm ${form.name}${form.contact ? ` (${form.contact})` : ''}.\nI'm interested in: ${form.service}.\n\n${form.message}`;
+
+  // Emails the enquiry to profile.email through FormSubmit (free, no account; see README).
+  const sendEmail = async (e) => {
     e.preventDefault();
+    if (!ready || status === 'sending') return;
+    setStatus('sending');
+    try {
+      const res = await fetch(`https://formsubmit.co/ajax/${profile.email}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          _subject: `New portfolio enquiry – ${form.service}`,
+          _template: 'table',
+          _captcha: 'false',
+          _honey: form._honey,
+          Name: form.name,
+          'Email / Phone': form.contact,
+          Service: form.service,
+          Message: form.message,
+        }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (res.ok && String(data.success) === 'true') {
+        setStatus('sent');
+        setForm(emptyForm);
+      } else {
+        setStatus('error');
+        setNote(data.message || '');
+      }
+    } catch {
+      setStatus('error');
+      setNote('');
+    }
+  };
+
+  const sendWhatsApp = () => {
     if (!ready) return;
     window.open(`https://wa.me/${profile.whatsapp}?text=${encodeURIComponent(text)}`, '_blank', 'noopener');
   };
-  const mailHref = `mailto:${profile.email}?subject=${encodeURIComponent('Project enquiry – ' + form.service)}&body=${encodeURIComponent(text)}`;
 
   const channels = [
     { icon: 'mail', label: 'Email', value: profile.email, href: `mailto:${profile.email}` },
@@ -280,26 +316,46 @@ function Contact() {
               </a>
             ))}
           </div>
-          <a href={profile.resume} download className="btn btn--light">
+          <a href={profile.resume} download="Jayashri_Sable_Resume.pdf" className="btn btn--light">
             <Icon name="download" size={18} /> Download my resume
           </a>
         </div>
-        <form className="card contact__form" onSubmit={sendWhatsApp}>
-          <h3>Quick enquiry</h3>
-          <label>Your name<input value={form.name} onChange={set('name')} placeholder="e.g. Rahul Patil" required /></label>
-          <label>
-            What do you need?
-            <select value={form.service} onChange={set('service')}>
-              {services.map((s) => <option key={s.title}>{s.title}</option>)}
-              <option>Something else</option>
-            </select>
-          </label>
-          <label>Project details<textarea rows={4} value={form.message} onChange={set('message')} placeholder="Tell me about your business and what you want to build" required /></label>
-          <button className="btn btn--primary btn--block" type="submit" disabled={!ready}>
-            <Icon name="whatsapp" size={18} /> Send on WhatsApp
-          </button>
-          <a className={`form__alt ${ready ? '' : 'is-disabled'}`} href={ready ? mailHref : undefined}>or send it by email</a>
-        </form>
+        {status === 'sent' ? (
+          <div className="card contact__form contact__done">
+            <span className="contact__done-icon"><Icon name="check" size={30} strokeWidth={2.4} /></span>
+            <h3>Thank you – your message has been sent.</h3>
+            <p>I’ll reply within 24 hours. For a faster answer you can also message me on WhatsApp.</p>
+            <button className="btn btn--ghost" onClick={() => setStatus('idle')}>Send another message</button>
+          </div>
+        ) : (
+          <form className="card contact__form" onSubmit={sendEmail}>
+            <h3>Send me a message</h3>
+            <div className="form__row">
+              <label>Your name<input value={form.name} onChange={set('name')} placeholder="e.g. Rahul Patil" required /></label>
+              <label>Email or phone<input value={form.contact} onChange={set('contact')} placeholder="So I can reply to you" required /></label>
+            </div>
+            <label>
+              What do you need?
+              <select value={form.service} onChange={set('service')}>
+                {services.map((s) => <option key={s.title}>{s.title}</option>)}
+                <option>Something else</option>
+              </select>
+            </label>
+            <label>Project details<textarea rows={4} value={form.message} onChange={set('message')} placeholder="Tell me about your business and what you want to build" required /></label>
+            <input type="text" name="_honey" value={form._honey} onChange={set('_honey')} className="form__honey" tabIndex={-1} autoComplete="off" aria-hidden="true" />
+            {status === 'error' && (
+              <p className="form__error">
+                The message could not be sent{note ? ` (${note})` : ''}. Please use WhatsApp or email {profile.email} directly.
+              </p>
+            )}
+            <button className="btn btn--primary btn--block" type="submit" disabled={!ready || status === 'sending'}>
+              <Icon name="mail" size={18} /> {status === 'sending' ? 'Sending…' : 'Send message'}
+            </button>
+            <button type="button" className="btn btn--whatsapp btn--block" onClick={sendWhatsApp} disabled={!ready}>
+              <Icon name="whatsapp" size={18} /> Send on WhatsApp instead
+            </button>
+          </form>
+        )}
       </div>
       <footer className="container footer">
         <span>© {new Date().getFullYear()} {profile.fullName}. All rights reserved.</span>

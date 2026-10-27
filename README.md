@@ -17,6 +17,13 @@ Open http://localhost:5190
 Everything (name, links, services, projects, skills) is in `src/data/profile.js`.
 Your resume is `public/Jayashri_Sable_Resume.pdf` – replace the file to update it (keep the same name).
 
+## Contact form
+
+- **Send message** emails the enquiry to the address in `profile.email` using FormSubmit (free, no account).
+  The very first time someone sends a message, FormSubmit emails you an **activation link** – click it once,
+  and every message after that arrives in your inbox. Send yourself a test message right after deploying.
+- **Send on WhatsApp instead** opens WhatsApp with the visitor's message already typed to your number.
+
 ## Deploy for free (one-time setup)
 
 1. **GitHub account** – sign up at https://github.com/signup (free).
