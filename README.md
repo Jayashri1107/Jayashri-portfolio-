@@ -50,7 +50,7 @@ src/
   Portfolio.jsx          home page sections
   ProjectPage.jsx        separate page for each project (/projects/<name>)
   components/            navbar, icons, live project preview
-  demos/                 clinic, inventory and business demos
+  demos/                 Aura Interiors business website demo
 public/                  resume PDF, favicon
 vercel.json              makes page links work on Vercel
 .github/workflows/       automatic GitHub Pages deployment
