@@ -1,3 +1,7 @@
+.demo-banner { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; padding: 10px 20px; background: #0f172a; color: #cbd5e1; font-size: 13px; font-family: 'Inter', system-ui, sans-serif; }
+.demo-banner__back { display: inline-flex; align-items: center; gap: 6px; color: #fff; font-weight: 600; }
+.demo-banner__note { flex: 1; }
+
 .biz { --b-ink: #2b2118; --b-acc: #b07a46; --b-cream: #faf6f1; font-family: 'Inter', system-ui, sans-serif; color: var(--b-ink); background: #fff; }
 .biz h1, .biz h2, .biz h3 { font-family: Georgia, 'Times New Roman', serif; letter-spacing: -.01em; margin: 0 0 .5em; }
 .biz p { color: #5b4d40; }

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from './components/Navbar.jsx';
 import Icon from './components/Icon.jsx';
-import ProjectPreview from './components/ProjectPreview.jsx';
+import ProjectMedia from './components/ProjectMedia.jsx';
 import { profile, stats, experience, education, services, projects, skills, tools, process } from './data/profile.js';
 
 function SectionHead({ eyebrow, title, text }) {
@@ -154,18 +154,22 @@ function Projects() {
       <div className="container">
         <SectionHead
           eyebrow="Projects"
-          title="Working demo projects"
-          text="These are demo projects I built to show what I can make for your business. They use sample data only and are not client work – open them and try every feature."
+          title="Selected work"
+          text="Real products I have worked on as part of development teams, plus a demo website you can try. Demo projects use sample data only and are not client work."
         />
         <div className="projects">
           {projects.map((p, i) => (
             <article key={p.slug} className={`project ${i % 2 ? 'project--flip' : ''}`}>
-              <Link to={p.path} className="project__media" aria-label={`Open ${p.title} demo`}>
-                <ProjectPreview path={p.path} title={p.title} />
-              </Link>
+              <div className="project__media">
+                <ProjectMedia project={p} />
+              </div>
               <div className="project__body">
-                <span className="tag">{p.tag}</span>
+                <div className="project__top">
+                  <span className="project__num">{String(i + 1).padStart(2, '0')}</span>
+                  <span className={`tag tag--${p.kind}`}>{p.kind === 'work' ? 'Professional work' : 'Demo project'}</span>
+                </div>
                 <h3>{p.title}</h3>
+                <span className="project__role">{p.role}</span>
                 <p>{p.summary}</p>
                 <ul className="checks">
                   {p.features.map((f) => (
@@ -175,9 +179,15 @@ function Projects() {
                 <div className="chips">
                   {p.stack.map((t) => <span key={t} className="chip">{t}</span>)}
                 </div>
-                <Link to={p.path} className="btn btn--primary">
-                  Open live demo <Icon name="external" size={16} />
-                </Link>
+                <div className="project__links">
+                  {p.links.map((l, j) => {
+                    const cls = `btn ${j === 0 ? 'btn--primary' : 'btn--ghost'}`;
+                    const inner = <>{l.label} <Icon name="external" size={16} /></>;
+                    return l.to
+                      ? <Link key={l.label} to={l.to} className={cls}>{inner}</Link>
+                      : <a key={l.label} href={l.href} target="_blank" rel="noreferrer" className={cls}>{inner}</a>;
+                  })}
+                </div>
               </div>
             </article>
           ))}

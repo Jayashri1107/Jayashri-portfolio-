@@ -80,36 +80,59 @@ export const services = [
   },
 ];
 
+// kind: 'work' = real team project I worked on, 'demo' = demo built for this portfolio.
+// media: 'image' (real screenshot), 'shop' (designed preview), 'live' (live view of the demo page).
 export const projects = [
   {
-    slug: 'clinic',
-    title: 'Clinic Management System',
-    tag: 'Demo project',
+    slug: 'perinexa',
+    kind: 'work',
+    title: 'Perinexa – Hospital Management App',
+    role: 'Software Developer · Anandi Private Limited · 2026 – Present',
     summary:
-      'A front-desk system for small clinics: patient register, appointment booking, today’s queue and a dashboard with daily numbers.',
-    features: ['Patient registration & search', 'Appointment booking with status', 'Dashboard with daily stats', 'Data saved in the browser'],
-    stack: ['React.js', 'CSS', 'localStorage'],
-    path: '/demos/clinic',
+      'A secure hospital workspace used by staff and patients: OPD and appointments, wards and inpatients, lab, pharmacy and billing – private by design.',
+    features: [
+      'Built pregnancy-care modules and visit follow-ups',
+      'Scheduling of lab tests and sonography',
+      'API integrations across frontend and backend',
+      'Testing, debugging and UI improvements',
+    ],
+    stack: ['React.js', 'Node.js', 'Express.js', 'MongoDB'],
+    media: 'image',
+    image: '/shots/perinexa.png',
+    links: [{ label: 'Visit live app', href: 'https://app.perinexa.com' }],
   },
   {
-    slug: 'inventory',
-    title: 'Inventory Management System',
-    tag: 'Demo project',
+    slug: 'ipshopy',
+    kind: 'work',
+    title: 'IpShopy – E-commerce Store & Reel Studio',
+    role: 'Full-Stack Developer · IpShopy Private Limited · 2025 – 2026',
     summary:
-      'Stock control for shops and small warehouses: products, stock in / stock out, low-stock alerts and a movement history.',
-    features: ['Add, edit and delete products', 'Stock in / out with history', 'Low-stock alerts', 'Inventory value summary'],
-    stack: ['React.js', 'CSS', 'localStorage'],
-    path: '/demos/inventory',
+      'An online shopping store built on OpenCart, and Reel Studio – a media content platform with login, dashboard and content management.',
+    features: [
+      'Customised OpenCart modules, controllers and templates',
+      'Developed REST APIs for Reel Studio',
+      'Optimised MySQL queries for faster pages',
+      'Fixed bugs and improved site performance',
+    ],
+    stack: ['PHP', 'OpenCart', 'React.js', 'Node.js', 'MySQL'],
+    media: 'shop',
+    links: [
+      { label: 'Visit ipshopy.com', href: 'https://ipshopy.com' },
+      { label: 'Reel Studio', href: 'https://studio.ipshopy.com' },
+    ],
   },
   {
     slug: 'business',
-    title: 'Business Website',
-    tag: 'Demo project',
+    kind: 'demo',
+    title: 'Business Website – Interior Studio',
+    role: 'Demo project · built to show what I can make for your business',
     summary:
-      'A complete one-page website for a fictional interior design studio, with services, gallery, testimonials and an enquiry form.',
-    features: ['Responsive landing page', 'Services & pricing sections', 'Enquiry form with validation', 'WhatsApp call-to-action'],
+      'A complete website for a fictional interior design studio, with services and prices, a work gallery, reviews, an enquiry form and a WhatsApp button.',
+    features: ['Mobile-friendly design', 'Services & pricing sections', 'Enquiry form with validation', 'WhatsApp call-to-action'],
     stack: ['React.js', 'CSS'],
+    media: 'live',
     path: '/demos/business',
+    links: [{ label: 'Open live demo', to: '/demos/business' }],
   },
 ];
 
