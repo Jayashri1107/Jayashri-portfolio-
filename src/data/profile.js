@@ -195,19 +195,48 @@ export const projects = [
   },
 ];
 
-export const skills = [
-  { name: 'React.js', group: 'Frontend', level: 85 },
-  { name: 'JavaScript (ES6+)', group: 'Frontend', level: 85 },
-  { name: 'HTML5', group: 'Frontend', level: 90 },
-  { name: 'CSS3 & Responsive Design', group: 'Frontend', level: 85 },
-  { name: 'Node.js', group: 'Backend', level: 80 },
-  { name: 'Express.js', group: 'Backend', level: 80 },
-  { name: 'PHP & OpenCart', group: 'Backend', level: 80 },
-  { name: 'MongoDB & Mongoose', group: 'Database', level: 78 },
-  { name: 'MySQL', group: 'Database', level: 80 },
+export const skillGroups = [
+  {
+    name: 'Frontend',
+    icon: 'globe',
+    text: 'Fast, responsive interfaces that look great on every screen.',
+    skills: [
+      { name: 'React.js', logo: 'react', use: 'Single-page apps & reusable components', level: 'Advanced' },
+      { name: 'JavaScript', logo: 'js', use: 'ES6+, async code & DOM logic', level: 'Advanced' },
+      { name: 'HTML5', logo: 'html', use: 'Semantic, accessible page structure', level: 'Expert' },
+      { name: 'CSS3', logo: 'css', use: 'Responsive layouts & animations', level: 'Advanced' },
+    ],
+  },
+  {
+    name: 'Backend',
+    icon: 'code',
+    text: 'Secure servers, REST APIs and business logic.',
+    skills: [
+      { name: 'Node.js', logo: 'node', use: 'Server-side JavaScript', level: 'Proficient' },
+      { name: 'Express.js', logo: 'express', use: 'REST APIs, routing & auth', level: 'Proficient' },
+      { name: 'PHP', logo: 'php', use: 'Server logic & MVC apps', level: 'Proficient' },
+      { name: 'OpenCart', logo: 'opencart', use: 'E-commerce modules & themes', level: 'Proficient' },
+    ],
+  },
+  {
+    name: 'Database',
+    icon: 'database',
+    text: 'Well-designed data that stays fast as you grow.',
+    skills: [
+      { name: 'MongoDB', logo: 'mongodb', use: 'Document data with Mongoose', level: 'Proficient' },
+      { name: 'MySQL', logo: 'mysql', use: 'Relational design & query tuning', level: 'Proficient' },
+    ],
+  },
 ];
 
-export const tools = ['Git', 'GitHub', 'REST APIs', 'VS Code', 'XAMPP', 'GitHub Pages'];
+export const tools = [
+  { name: 'Git', logo: 'git' },
+  { name: 'GitHub', logo: 'github' },
+  { name: 'REST APIs', logo: 'api' },
+  { name: 'VS Code', logo: 'vscode' },
+  { name: 'XAMPP', logo: 'xampp' },
+  { name: 'GitHub Pages', logo: 'pages' },
+];
 
 export const process = [
   { step: 'Requirements', text: 'A free call to understand your business, goals, pages and budget. You get a clear written scope and quote.' },

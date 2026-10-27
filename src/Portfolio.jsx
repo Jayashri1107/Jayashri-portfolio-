@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom';
 import Navbar from './components/Navbar.jsx';
 import Icon from './components/Icon.jsx';
 import ProjectMedia from './components/ProjectMedia.jsx';
+import TechLogo from './components/TechLogo.jsx';
 import { asset } from './asset.js';
-import { profile, stats, experience, education, services, projects, skills, tools, process } from './data/profile.js';
+import { profile, stats, experience, education, services, projects, skillGroups, tools, process } from './data/profile.js';
 
 function SectionHead({ eyebrow, title, text }) {
   return (
@@ -186,26 +187,69 @@ function Projects() {
 }
 
 function Skills() {
-  const groups = ['Frontend', 'Backend', 'Database'];
+  const total = skillGroups.reduce((n, g) => n + g.skills.length, 0);
   return (
-    <section id="skills" className="section section--tint">
+    <section id="skills" className="section section--tint skills-sec">
       <div className="container">
-        <SectionHead eyebrow="Skills" title="Technologies I work with" />
-        <div className="skills">
-          {groups.map((g) => (
-            <div key={g} className="card skills__group">
-              <h3>{g}</h3>
-              {skills.filter((s) => s.group === g).map((s) => (
-                <div key={s.name} className="skill">
-                  <div className="skill__row"><span>{s.name}</span></div>
-                  <div className="skill__bar"><span style={{ width: `${s.level}%` }} /></div>
-                </div>
-              ))}
-            </div>
-          ))}
+        <div className="skills-head">
+          <SectionHead
+            eyebrow="Skills"
+            title="Technologies I work with"
+            text="A complete full-stack toolkit – from the screens your customers see to the server and database behind them."
+          />
+          <div className="skills-badges">
+            <div><strong>{total}</strong><span>Core technologies</span></div>
+            <div><strong>MERN</strong><span>+ PHP / OpenCart</span></div>
+          </div>
         </div>
-        <div className="chips chips--center">
-          {tools.map((t) => <span key={t} className="chip chip--lg">{t}</span>)}
+
+        <div className="skills">
+          {skillGroups.map((g, i) => {
+            const card = (
+              <article key={g.name} className="card skills__group">
+                <header className="skills__top">
+                  <span className="skills__icon"><Icon name={g.icon} size={22} /></span>
+                  <div>
+                    <h3>{g.name}</h3>
+                    <span className="skills__count">{g.skills.length} technologies</span>
+                  </div>
+                </header>
+                <p className="skills__text">{g.text}</p>
+                <ul className="skills__list">
+                  {g.skills.map((s) => (
+                    <li key={s.name} className="skill">
+                      <span className="skill__logo"><TechLogo name={s.logo} size={30} /></span>
+                      <span className="skill__info">
+                        <strong>{s.name}</strong>
+                        <em>{s.use}</em>
+                      </span>
+                      <span className={`skill__level skill__level--${s.level.toLowerCase()}`}>{s.level}</span>
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            );
+            if (i < skillGroups.length - 1) return card;
+            return (
+              <div key={g.name} className="skills__col">
+                {card}
+                <div className="skills__cta">
+                  <h3>One developer for your whole project</h3>
+                  <p>Design, frontend, backend, database and launch – handled end to end, so you have one person to talk to.</p>
+                  <Link to="/#contact" className="btn btn--light btn--sm">Start a project <Icon name="arrow" size={16} /></Link>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        <div className="toolbox">
+          <span className="toolbox__label"><Icon name="wrench" size={18} /> Tools & workflow</span>
+          <div className="toolbox__items">
+            {tools.map((t) => (
+              <span key={t.name} className="toolbox__item"><TechLogo name={t.logo} size={22} /> {t.name}</span>
+            ))}
+          </div>
         </div>
       </div>
     </section>
