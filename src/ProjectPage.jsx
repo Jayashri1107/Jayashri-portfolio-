@@ -3,9 +3,16 @@ import { Link, Navigate, useParams } from 'react-router-dom';
 import Navbar from './components/Navbar.jsx';
 import Icon from './components/Icon.jsx';
 import ProjectMedia from './components/ProjectMedia.jsx';
-import { profile, projects } from './data/profile.js';
+import { profile, projects, kindLabel } from './data/profile.js';
 
-function ProjectLinks({ links }) {
+function ProjectLinks({ links, offline }) {
+  if (offline)
+    return (
+      <p className="pp-status" role="status">
+        <span className="pp-status__badge"><Icon name="clock" size={14} /> Temporarily offline</span>
+        {offline}
+      </p>
+    );
   return (
     <div className="project__links">
       {links.map((l, j) => {
@@ -44,11 +51,11 @@ export default function ProjectPage() {
             </nav>
             <div className="pp-hero__grid">
               <div>
-                <span className={`tag tag--${p.kind}`}>{p.kind === 'work' ? 'Professional work' : 'Demo project'}</span>
+                <span className={`tag tag--${p.kind}`}>{kindLabel[p.kind]}</span>
                 <h1>{p.title}<span>{p.subtitle}</span></h1>
                 <p className="pp-hero__role">{p.role}</p>
                 <p className="pp-hero__lead">{p.summary}</p>
-                <ProjectLinks links={p.links} />
+                <ProjectLinks links={p.links} offline={p.offline} />
               </div>
               <div className="pp-hero__media"><ProjectMedia project={p} /></div>
             </div>
@@ -61,7 +68,7 @@ export default function ProjectPage() {
               <span className="eyebrow">Overview</span>
               <h2>About the project</h2>
               {p.overview.map((para) => <p key={para}>{para}</p>)}
-              <h3 className="pp-sub">{p.kind === 'work' ? 'My contribution' : 'What’s included'}</h3>
+              <h3 className="pp-sub">{p.kind === 'demo' ? 'What’s included' : 'My contribution'}</h3>
               <ul className="checks checks--lg">
                 {p.features.map((f) => <li key={f}><Icon name="check" size={18} /> {f}</li>)}
               </ul>
@@ -83,7 +90,7 @@ export default function ProjectPage() {
           <div className="container">
             <div className="section__head">
               <span className="eyebrow">Key features</span>
-              <h2>{p.kind === 'work' ? 'What the product does' : 'What makes it work'}</h2>
+              <h2>{p.kind === 'demo' ? 'What makes it work' : 'What the product does'}</h2>
             </div>
             <div className="pp-highlights">
               {p.highlights.map(([icon, title, text]) => (

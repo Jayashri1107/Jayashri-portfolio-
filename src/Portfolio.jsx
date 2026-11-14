@@ -5,7 +5,7 @@ import Icon from './components/Icon.jsx';
 import ProjectMedia from './components/ProjectMedia.jsx';
 import TechLogo from './components/TechLogo.jsx';
 import { asset } from './asset.js';
-import { profile, stats, experience, education, services, projects, skillGroups, tools, process } from './data/profile.js';
+import { profile, stats, experience, education, services, projects, kindLabel, skillGroups, tools, process } from './data/profile.js';
 
 function SectionHead({ eyebrow, title, text }) {
   return (
@@ -28,7 +28,7 @@ function Hero() {
           </span>
           <h1>
             Hi, I’m {profile.name}.<br />
-            <span className="gradient-text">{profile.title}</span>
+            <span className="hero__role">{profile.title}</span>
           </h1>
           <p className="hero__lead">{profile.intro}</p>
           <div className="hero__actions">
@@ -90,7 +90,8 @@ function About() {
             clinic workflows – where reliability, security and clean code really matter.
           </p>
           <p>
-            For freelance clients I bring the same approach: understand the problem first, keep you updated, and deliver software that is simple to
+            I also build for clients directly – most recently the <strong>GS Manpower</strong> website, a bilingual site with secure forms and an
+            admin panel for a staffing company. For every client I bring the same approach: understand the problem first, keep you updated, and deliver software that is simple to
             use and easy to maintain.
           </p>
           <div className="edu">
@@ -157,7 +158,7 @@ function Projects() {
         <SectionHead
           eyebrow="Projects"
           title="Selected work"
-          text="Real products I have worked on as part of development teams, plus a demo website you can try (sample content, not client work). Open any project to see the full details."
+          text="Products I have built and maintained as part of development teams, and a live website delivered for a client. Open any project for the full details."
         />
         <div className="pcards">
           {projects.map((p, i) => (
@@ -168,7 +169,7 @@ function Projects() {
               <div className="pcard__body">
                 <div className="project__top">
                   <span className="project__num">{String(i + 1).padStart(2, '0')}</span>
-                  <span className={`tag tag--${p.kind}`}>{p.kind === 'work' ? 'Professional work' : 'Demo project'}</span>
+                  <span className={`tag tag--${p.kind}`}>{kindLabel[p.kind]}</span>
                 </div>
                 <h3>{p.title}</h3>
                 <span className="pcard__sub">{p.subtitle}</span>
@@ -176,6 +177,7 @@ function Projects() {
                 <div className="chips">
                   {p.stack.slice(0, 4).map((t) => <span key={t} className="chip">{t}</span>)}
                 </div>
+                {p.offline && <span className="pcard__note"><Icon name="clock" size={14} /> Live site temporarily offline</span>}
                 <span className="pcard__more">View project <Icon name="arrow" size={16} /></span>
               </div>
             </Link>

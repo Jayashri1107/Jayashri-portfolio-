@@ -81,7 +81,7 @@ const logos = {
   ),
   api: (
     <>
-      <rect x="4" y="6" width="24" height="20" rx="5" fill="#0f766e" />
+      <rect x="4" y="6" width="24" height="20" rx="5" fill="#1d4ed8" />
       <text x="16" y="19.5" textAnchor="middle" fontSize="8.5" fontWeight="800" fontFamily="Arial, sans-serif" fill="#fff">API</text>
     </>
   ),

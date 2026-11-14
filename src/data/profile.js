@@ -79,9 +79,12 @@ export const services = [
   },
 ];
 
-// kind: 'work' = real team project I worked on, 'demo' = demo built for this portfolio.
+// kind: 'work' = real team project I worked on as an employee, 'client' = project built for a client, 'demo' = demo built for this portfolio.
+// offline: text shown instead of the links while a live site is down.
 // media: 'image' (real screenshot), 'shop' (designed preview), 'live' (live view of the demo page).
 // Each project has its own page at /projects/<slug>.
+export const kindLabel = { work: 'Professional work', client: 'Client project', demo: 'Demo project' };
+
 export const projects = [
   {
     slug: 'perinexa',
@@ -152,46 +155,45 @@ export const projects = [
     ],
     stack: ['PHP', 'OpenCart', 'React.js', 'Node.js', 'MySQL'],
     media: 'shop',
-    links: [
-      { label: 'Visit ipshopy.com', href: 'https://ipshopy.com' },
-      { label: 'Reel Studio', href: 'https://studio.ipshopy.com' },
-    ],
+    links: [],
+    offline:
+      'The live IpShopy store and Reel Studio are temporarily offline. The preview shows the store layout; happy to walk you through my work on a call.',
   },
   {
-    slug: 'business',
-    kind: 'demo',
-    title: 'Aura Interiors',
-    subtitle: 'Business Website Demo',
-    role: 'Demo project · built to show what I can make for your business',
-    short: 'A complete website for an interior design studio that turns visitors into enquiries.',
+    slug: 'gs-manpower',
+    kind: 'client',
+    title: 'GS Manpower',
+    subtitle: 'Staffing Company Website & Admin Panel',
+    role: 'Full-Stack Developer · Client project · 2026',
+    short: 'A bilingual corporate website for a staffing agency, with secure enquiry forms and an admin panel for leads.',
     summary:
-      'A complete, conversion-focused website for a fictional interior design studio – the kind of site that turns visitors into phone calls and enquiries.',
+      'A live corporate website for GS Manpower Services, a staffing agency for hospitals and factories – English and Marathi pages, employer and job-seeker forms, and a password-protected admin panel.',
     facts: [
-      ['Client', 'Fictional business (demo)'],
-      ['Built by', 'Jayashri Sable'],
-      ['Pages', 'One-page website, 9 sections'],
-      ['Type', 'Business website'],
+      ['Client', 'GS Manpower Services'],
+      ['My role', 'Design, development & deployment'],
+      ['Year', '2026'],
+      ['Type', 'Business website + admin panel'],
     ],
     overview: [
-      'Aura Interiors is a demo website I designed and built for a fictional interior design studio. It shows the kind of website I can create for a local business – clinics, shops, coaching classes, restaurants, studios and more.',
-      'Every section has a job: the hero and reviews build trust, services and pricing answer “how much?”, the gallery shows the work, and the enquiry form and WhatsApp button turn visitors into real leads.',
+      'GS Manpower Services supplies verified, trained staff to hospitals and factories in Chhatrapati Sambhajinagar. They needed a website that builds trust with employers and makes it easy for job seekers to apply.',
+      'I built the full site in English and Marathi, plus a Node.js backend that stores every enquiry and job application encrypted, alerts the team about new leads, and gives them an admin panel to manage leads and update website details without touching code.',
     ],
     highlights: [
-      ['star', 'Custom design', 'Hand-drawn illustrations, elegant fonts and smooth scroll animations.'],
-      ['dashboard', 'Gallery & pricing', 'Filterable design gallery and clear pricing packages.'],
-      ['phone', 'Lead capture', 'Call-back form with validation and a floating WhatsApp button.'],
-      ['check', 'Mobile-friendly', 'Looks great on phones, tablets and desktops.'],
+      ['globe', 'English & Marathi', 'Every page in two languages, with a one-click language switch.'],
+      ['phone', 'Lead capture', 'Employer enquiry and job application forms with resume upload and WhatsApp button.'],
+      ['dashboard', 'Admin panel', 'Secure login to review leads and edit contact details and settings.'],
+      ['check', 'Secure by design', 'Encrypted storage, spam protection, rate limits and strict security headers.'],
     ],
     features: [
-      'Custom illustrations and smooth scroll animations',
-      'Filterable design gallery and pricing packages',
-      'Enquiry form with validation and WhatsApp button',
-      'Reviews, FAQ and fully mobile-friendly layout',
+      'Designed and built 7 pages in English and Marathi',
+      'Built the form backend with encrypted storage and lead alerts',
+      'Built the admin panel for leads and website settings',
+      'Deployed the live site with HTTPS on the client’s domain',
     ],
-    stack: ['React.js', 'CSS'],
-    media: 'live',
-    path: '/demos/business',
-    links: [{ label: 'Open live demo', to: '/demos/business' }],
+    stack: ['Node.js', 'JavaScript', 'HTML5', 'CSS3'],
+    media: 'image',
+    image: 'shots/gsmanpower.png',
+    links: [{ label: 'Visit gsmanpower.in', href: 'https://www.gsmanpower.in' }],
   },
 ];
 
