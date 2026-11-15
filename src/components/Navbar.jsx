@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Icon from './Icon.jsx';
 import { profile } from '../data/profile.js';
 import { asset } from '../asset.js';
@@ -27,6 +27,19 @@ function useTheme() {
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [theme, toggleTheme] = useTheme();
+  const [active, setActive] = useState('');
+  const { pathname } = useLocation();
+
+  // Marks the menu link of the section currently on screen (home page only).
+  useEffect(() => {
+    if (pathname !== '/' || !('IntersectionObserver' in window)) return undefined;
+    const io = new IntersectionObserver(
+      (entries) => entries.forEach((e) => e.isIntersecting && setActive(e.target.id)),
+      { rootMargin: '-45% 0px -50% 0px' },
+    );
+    links.forEach(([id]) => { const el = document.getElementById(id); if (el) io.observe(el); });
+    return () => io.disconnect();
+  }, [pathname]);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -47,7 +60,7 @@ export default function Navbar() {
         </Link>
         <nav className={`nav__links ${open ? 'is-open' : ''}`}>
           {links.map(([id, label]) => (
-            <Link key={id} to={`/#${id}`} onClick={close}>
+            <Link key={id} to={`/#${id}`} onClick={close} className={active === id ? 'is-active' : undefined}>
               {label}
             </Link>
           ))}

@@ -10,6 +10,7 @@ export const profile = {
   whatsapp: '919022937420',
   linkedin: 'https://www.linkedin.com/in/jayashri-sable-981b27272',
   github: 'https://github.com/Jayashri1107',
+  instagram: '', // e.g. 'https://www.instagram.com/your-handle' – the footer icon appears once this is filled
   resume: 'Jayashri_Sable_Resume.pdf',
   intro:
     'I build fast, secure and easy-to-use websites and custom software for growing businesses – from a clean business website to a complete admin dashboard, CRM or management system.',

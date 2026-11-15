@@ -3,6 +3,7 @@ import { Link, Navigate, useParams } from 'react-router-dom';
 import Navbar from './components/Navbar.jsx';
 import Icon from './components/Icon.jsx';
 import ProjectMedia from './components/ProjectMedia.jsx';
+import SiteFooter from './components/SiteFooter.jsx';
 import { profile, projects, kindLabel } from './data/profile.js';
 
 function ProjectLinks({ links, offline }) {
@@ -132,12 +133,7 @@ export default function ProjectPage() {
           </div>
         </section>
       </main>
-      <footer className="pp-footer">
-        <div className="container footer footer--light">
-          <span>© {new Date().getFullYear()} {profile.fullName}</span>
-          <Link to="/#projects">All projects</Link>
-        </div>
-      </footer>
+      <SiteFooter />
     </>
   );
 }
