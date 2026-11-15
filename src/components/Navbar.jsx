@@ -12,8 +12,21 @@ const links = [
   ['contact', 'Contact'],
 ];
 
+// Light or dark theme: remembers the visitor's choice, otherwise follows their device setting.
+function useTheme() {
+  const [theme, setTheme] = useState(() => document.documentElement.dataset.theme || 'light');
+  const toggle = () => {
+    const next = theme === 'dark' ? 'light' : 'dark';
+    document.documentElement.dataset.theme = next;
+    try { localStorage.setItem('theme', next); } catch { /* private mode: choice lasts for this visit */ }
+    setTheme(next);
+  };
+  return [theme, toggle];
+}
+
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const [theme, toggleTheme] = useTheme();
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -45,9 +58,19 @@ export default function Navbar() {
             Hire Me
           </Link>
         </nav>
-        <button className="nav__toggle" aria-label="Toggle menu" onClick={() => setOpen(!open)}>
-          <Icon name={open ? 'close' : 'menu'} size={24} />
-        </button>
+        <div className="nav__end">
+          <button
+            className="theme-btn"
+            onClick={toggleTheme}
+            aria-label={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
+            title={theme === 'dark' ? 'Light theme' : 'Dark theme'}
+          >
+            <Icon name={theme === 'dark' ? 'sun' : 'moon'} size={18} />
+          </button>
+          <button className="nav__toggle" aria-label="Toggle menu" onClick={() => setOpen(!open)}>
+            <Icon name={open ? 'close' : 'menu'} size={24} />
+          </button>
+        </div>
       </div>
     </header>
   );
