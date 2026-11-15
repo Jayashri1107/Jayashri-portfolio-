@@ -54,28 +54,28 @@ export const education = [
 export const services = [
   {
     icon: 'globe',
-    title: 'Business Website Development',
-    text: 'Modern, mobile-friendly websites that explain your business clearly and turn visitors into enquiries – with contact forms, WhatsApp and Google Maps.',
+    title: 'Business Websites',
+    text: 'Mobile-friendly websites that turn visitors into enquiries.',
   },
   {
     icon: 'code',
-    title: 'Custom Software Development',
-    text: 'Web applications built around the way your business actually works – billing, bookings, records, reports and more.',
+    title: 'Custom Software',
+    text: 'Web apps for billing, bookings, records and reports.',
   },
   {
     icon: 'dashboard',
-    title: 'Admin Dashboards & CRM',
-    text: 'Secure admin panels to manage customers, leads, orders and staff, with search, filters and clear reports.',
+    title: 'Dashboards & CRM',
+    text: 'Secure panels to manage customers, leads and orders.',
   },
   {
     icon: 'database',
-    title: 'API & Database Integration',
-    text: 'REST APIs with Node.js or PHP, MongoDB and MySQL design, and connecting your site to payment, SMS or email services.',
+    title: 'APIs & Databases',
+    text: 'REST APIs, databases and payment, SMS or email links.',
   },
   {
     icon: 'wrench',
-    title: 'Bug Fixing & Maintenance',
-    text: 'Fixing broken features, speeding up slow pages, OpenCart / PHP updates and ongoing monthly support.',
+    title: 'Maintenance',
+    text: 'Fixes, speed-ups and ongoing monthly support.',
   },
 ];
 
@@ -123,6 +123,42 @@ export const projects = [
     links: [{ label: 'Visit live app', href: 'https://app.perinexa.com' }],
   },
   {
+    slug: 'gs-manpower',
+    kind: 'client',
+    title: 'GS Manpower',
+    subtitle: 'Staffing Company Website & Admin Panel',
+    role: 'Full-Stack Developer · Client project · 2026',
+    short: 'A bilingual corporate website for a staffing agency, with secure enquiry forms and an admin panel for leads.',
+    summary:
+      'A live corporate website for GS Manpower Services, a staffing agency for hospitals and factories – English and Marathi pages, employer and job-seeker forms, and a password-protected admin panel.',
+    facts: [
+      ['Client', 'GS Manpower Services'],
+      ['My role', 'Design, development & deployment'],
+      ['Year', '2026'],
+      ['Type', 'Business website + admin panel'],
+    ],
+    overview: [
+      'GS Manpower Services supplies verified, trained staff to hospitals and factories in Chhatrapati Sambhajinagar. They needed a website that builds trust with employers and makes it easy for job seekers to apply.',
+      'I built the full site in English and Marathi, plus a Node.js backend that stores every enquiry and job application encrypted, alerts the team about new leads, and gives them an admin panel to manage leads and update website details without touching code.',
+    ],
+    highlights: [
+      ['globe', 'English & Marathi', 'Every page in two languages, with a one-click language switch.'],
+      ['phone', 'Lead capture', 'Employer enquiry and job application forms with resume upload and WhatsApp button.'],
+      ['dashboard', 'Admin panel', 'Secure login to review leads and edit contact details and settings.'],
+      ['check', 'Secure by design', 'Encrypted storage, spam protection, rate limits and strict security headers.'],
+    ],
+    features: [
+      'Designed and built 7 pages in English and Marathi',
+      'Built the form backend with encrypted storage and lead alerts',
+      'Built the admin panel for leads and website settings',
+      'Deployed the live site with HTTPS on the client’s domain',
+    ],
+    stack: ['Node.js', 'JavaScript', 'HTML5', 'CSS3'],
+    media: 'image',
+    image: 'shots/gsmanpower.png',
+    links: [{ label: 'Visit gsmanpower.in', href: 'https://www.gsmanpower.in' }],
+  },
+  {
     slug: 'ipshopy',
     kind: 'work',
     title: 'IpShopy',
@@ -158,42 +194,6 @@ export const projects = [
     links: [],
     offline:
       'The live IpShopy store and Reel Studio are temporarily offline. The preview shows the store layout; happy to walk you through my work on a call.',
-  },
-  {
-    slug: 'gs-manpower',
-    kind: 'client',
-    title: 'GS Manpower',
-    subtitle: 'Staffing Company Website & Admin Panel',
-    role: 'Full-Stack Developer · Client project · 2026',
-    short: 'A bilingual corporate website for a staffing agency, with secure enquiry forms and an admin panel for leads.',
-    summary:
-      'A live corporate website for GS Manpower Services, a staffing agency for hospitals and factories – English and Marathi pages, employer and job-seeker forms, and a password-protected admin panel.',
-    facts: [
-      ['Client', 'GS Manpower Services'],
-      ['My role', 'Design, development & deployment'],
-      ['Year', '2026'],
-      ['Type', 'Business website + admin panel'],
-    ],
-    overview: [
-      'GS Manpower Services supplies verified, trained staff to hospitals and factories in Chhatrapati Sambhajinagar. They needed a website that builds trust with employers and makes it easy for job seekers to apply.',
-      'I built the full site in English and Marathi, plus a Node.js backend that stores every enquiry and job application encrypted, alerts the team about new leads, and gives them an admin panel to manage leads and update website details without touching code.',
-    ],
-    highlights: [
-      ['globe', 'English & Marathi', 'Every page in two languages, with a one-click language switch.'],
-      ['phone', 'Lead capture', 'Employer enquiry and job application forms with resume upload and WhatsApp button.'],
-      ['dashboard', 'Admin panel', 'Secure login to review leads and edit contact details and settings.'],
-      ['check', 'Secure by design', 'Encrypted storage, spam protection, rate limits and strict security headers.'],
-    ],
-    features: [
-      'Designed and built 7 pages in English and Marathi',
-      'Built the form backend with encrypted storage and lead alerts',
-      'Built the admin panel for leads and website settings',
-      'Deployed the live site with HTTPS on the client’s domain',
-    ],
-    stack: ['Node.js', 'JavaScript', 'HTML5', 'CSS3'],
-    media: 'image',
-    image: 'shots/gsmanpower.png',
-    links: [{ label: 'Visit gsmanpower.in', href: 'https://www.gsmanpower.in' }],
   },
 ];
 

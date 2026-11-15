@@ -5,7 +5,7 @@ import Icon from './components/Icon.jsx';
 import ProjectMedia from './components/ProjectMedia.jsx';
 import TechLogo from './components/TechLogo.jsx';
 import { asset } from './asset.js';
-import { profile, stats, experience, education, services, projects, kindLabel, skillGroups, tools, process } from './data/profile.js';
+import { profile, stats, experience, education, services, projects, kindLabel, skillGroups, tools } from './data/profile.js';
 
 function SectionHead({ eyebrow, title, text }) {
   return (
@@ -79,20 +79,11 @@ function About() {
     <section id="about" className="section">
       <div className="container about">
         <div>
-          <SectionHead eyebrow="About me" title="A developer who cares about your business, not just the code" />
+          <SectionHead eyebrow="About me" title="Clean, reliable software for real businesses" />
           <p>
-            I’m a Full-Stack Web Developer from Chhatrapati Sambhajinagar with <strong>1+ year of professional experience</strong> building and
-            maintaining real web applications with React.js, Node.js, Express.js, PHP, MongoDB and MySQL.
-          </p>
-          <p>
-            At IpShopy I built frontend and backend features, customised OpenCart stores and developed REST APIs for the Reel Studio media platform.
-            Today I work as a Software Developer at Anandi Private Limited on <strong>Perinexa</strong>, a healthcare application for patient and
-            clinic workflows – where reliability, security and clean code really matter.
-          </p>
-          <p>
-            I also build for clients directly – most recently the <strong>GS Manpower</strong> website, a bilingual site with secure forms and an
-            admin panel for a staffing company. For every client I bring the same approach: understand the problem first, keep you updated, and deliver software that is simple to
-            use and easy to maintain.
+            I’m a Full-Stack Web Developer from Chhatrapati Sambhajinagar with <strong>1+ year of professional experience</strong> in React.js,
+            Node.js, Express.js, PHP, MongoDB and MySQL. I currently build <strong>Perinexa</strong>, a hospital management app, and I also
+            deliver websites for clients such as <strong>GS Manpower</strong>.
           </p>
           <div className="edu">
             {education.map((e) => (
@@ -113,7 +104,7 @@ function About() {
               <h4>{job.role}</h4>
               <span className="timeline__company">{job.company}</span>
               <ul>
-                {job.points.map((p) => <li key={p}>{p}</li>)}
+                {job.points.slice(0, 2).map((p) => <li key={p}>{p}</li>)}
               </ul>
             </article>
           ))}
@@ -130,7 +121,6 @@ function Services() {
         <SectionHead
           eyebrow="Services"
           title="What I can build for you"
-          text="From your first website to software that runs your daily operations."
         />
         <div className="services">
           {services.map((s) => (
@@ -140,11 +130,6 @@ function Services() {
               <p>{s.text}</p>
             </article>
           ))}
-          <article className="card service service--cta">
-            <h3>Have a different idea?</h3>
-            <p>Tell me what you need and I’ll suggest the simplest way to build it.</p>
-            <a href="#contact" className="btn btn--light btn--sm">Get a free quote <Icon name="arrow" size={16} /></a>
-          </article>
         </div>
       </div>
     </section>
@@ -158,27 +143,22 @@ function Projects() {
         <SectionHead
           eyebrow="Projects"
           title="Selected work"
-          text="Products I have built and maintained as part of development teams, and a live website delivered for a client. Open any project for the full details."
         />
         <div className="pcards">
-          {projects.map((p, i) => (
+          {projects.map((p) => (
             <Link key={p.slug} to={`/projects/${p.slug}`} className="pcard">
               <div className="pcard__media">
                 <ProjectMedia project={p} />
               </div>
               <div className="pcard__body">
-                <div className="project__top">
-                  <span className="project__num">{String(i + 1).padStart(2, '0')}</span>
-                  <span className={`tag tag--${p.kind}`}>{kindLabel[p.kind]}</span>
-                </div>
+                <span className={`tag tag--${p.kind}`}>{kindLabel[p.kind]}</span>
                 <h3>{p.title}</h3>
-                <span className="pcard__sub">{p.subtitle}</span>
                 <p>{p.short}</p>
-                <div className="chips">
-                  {p.stack.slice(0, 4).map((t) => <span key={t} className="chip">{t}</span>)}
-                </div>
                 {p.offline && <span className="pcard__note"><Icon name="clock" size={14} /> Live site temporarily offline</span>}
-                <span className="pcard__more">View project <Icon name="arrow" size={16} /></span>
+                <div className="pcard__foot">
+                  <span className="pcard__stack">{p.stack.slice(0, 3).join(' · ')}</span>
+                  <span className="pcard__more" aria-hidden="true"><Icon name="arrow" size={18} /></span>
+                </div>
               </div>
             </Link>
           ))}
@@ -189,89 +169,30 @@ function Projects() {
 }
 
 function Skills() {
-  const total = skillGroups.reduce((n, g) => n + g.skills.length, 0);
   return (
-    <section id="skills" className="section section--tint skills-sec">
+    <section id="skills" className="section section--tint">
       <div className="container">
-        <div className="skills-head">
-          <SectionHead
-            eyebrow="Skills"
-            title="Technologies I work with"
-            text="A complete full-stack toolkit – from the screens your customers see to the server and database behind them."
-          />
-          <div className="skills-badges">
-            <div><strong>{total}</strong><span>Core technologies</span></div>
-            <div><strong>MERN</strong><span>+ PHP / OpenCart</span></div>
-          </div>
-        </div>
-
-        <div className="skills">
-          {skillGroups.map((g, i) => {
-            const card = (
-              <article key={g.name} className="card skills__group">
-                <header className="skills__top">
-                  <span className="skills__icon"><Icon name={g.icon} size={22} /></span>
-                  <div>
-                    <h3>{g.name}</h3>
-                    <span className="skills__count">{g.skills.length} technologies</span>
-                  </div>
-                </header>
-                <p className="skills__text">{g.text}</p>
-                <ul className="skills__list">
-                  {g.skills.map((s) => (
-                    <li key={s.name} className="skill">
-                      <span className="skill__logo"><TechLogo name={s.logo} size={30} /></span>
-                      <span className="skill__info">
-                        <strong>{s.name}</strong>
-                        <em>{s.use}</em>
-                      </span>
-                      <span className={`skill__level skill__level--${s.level.toLowerCase()}`}>{s.level}</span>
-                    </li>
-                  ))}
-                </ul>
-              </article>
-            );
-            if (i < skillGroups.length - 1) return card;
-            return (
-              <div key={g.name} className="skills__col">
-                {card}
-                <div className="skills__cta">
-                  <h3>One developer for your whole project</h3>
-                  <p>Design, frontend, backend, database and launch – handled end to end, so you have one person to talk to.</p>
-                  <Link to="/#contact" className="btn btn--light btn--sm">Start a project <Icon name="arrow" size={16} /></Link>
-                </div>
+        <SectionHead eyebrow="Skills" title="Technologies I work with" />
+        <div className="skillrows">
+          {skillGroups.map((g) => (
+            <div key={g.name} className="skillrow">
+              <h3>{g.name}</h3>
+              <div className="skillrow__items">
+                {g.skills.map((sk) => (
+                  <span key={sk.name} className="skillchip"><TechLogo name={sk.logo} size={22} /> {sk.name}</span>
+                ))}
               </div>
-            );
-          })}
-        </div>
-
-        <div className="toolbox">
-          <span className="toolbox__label"><Icon name="wrench" size={18} /> Tools & workflow</span>
-          <div className="toolbox__items">
-            {tools.map((t) => (
-              <span key={t.name} className="toolbox__item"><TechLogo name={t.logo} size={22} /> {t.name}</span>
-            ))}
+            </div>
+          ))}
+          <div className="skillrow">
+            <h3>Tools</h3>
+            <div className="skillrow__items">
+              {tools.map((t) => (
+                <span key={t.name} className="skillchip"><TechLogo name={t.logo} size={22} /> {t.name}</span>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
-    </section>
-  );
-}
-
-function Process() {
-  return (
-    <section id="process" className="section">
-      <div className="container">
-        <SectionHead eyebrow="Work process" title="How we’ll work together" text="A simple, transparent process – you always know what’s happening." />
-        <ol className="process">
-          {process.map((p, i) => (
-            <li key={p.step} className="process__step">
-              <span className="process__num">{String(i + 1).padStart(2, '0')}</span>
-              <h3>{p.step}</h3>
-              <p>{p.text}</p>
-            </li>
-          ))}
-        </ol>
       </div>
     </section>
   );
@@ -339,9 +260,7 @@ function Contact() {
         <div>
           <span className="eyebrow eyebrow--light">Contact</span>
           <h2>Let’s build something for your business</h2>
-          <p className="contact__lead">
-            Tell me about your project. I usually reply within 24 hours with questions, a time estimate and a quote.
-          </p>
+          <p className="contact__lead">Tell me about your project – I reply within 24 hours.</p>
           <div className="channels">
             {channels.map((c) => (
               <a key={c.label} href={c.href} target={c.href.startsWith('http') ? '_blank' : undefined} rel="noreferrer" className="channel">
@@ -405,11 +324,10 @@ export default function Portfolio() {
       <Navbar />
       <main>
         <Hero />
+        <Projects />
         <About />
         <Services />
-        <Projects />
         <Skills />
-        <Process />
         <Contact />
       </main>
     </>

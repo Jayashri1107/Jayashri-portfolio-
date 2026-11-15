@@ -5,11 +5,10 @@ import { profile } from '../data/profile.js';
 import { asset } from '../asset.js';
 
 const links = [
+  ['projects', 'Projects'],
   ['about', 'About'],
   ['services', 'Services'],
-  ['projects', 'Projects'],
   ['skills', 'Skills'],
-  ['process', 'Process'],
   ['contact', 'Contact'],
 ];
 
